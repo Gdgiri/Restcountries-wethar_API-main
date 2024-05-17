@@ -1,0 +1,46 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+.container{
+    color: white;
+    background-color: rgb(35,64,75);
+   padding-bottom:15px ;
+   padding-top:15px ;
+    
+}
+.card{
+    border-radius: 10px !important;
+    background-image: linear-gradient(to right,rgb(221,202,163),rgb(67,85,90));
+    color: white;
+
+}
+
+.card h5{
+    background-color: black !important;
+    color: white;
+    display: block;
+    padding: 15px;
+    width: 100%;
+}
+
+.card img{
+   
+    width: 300px;
+    position: relative;
+    left: 60px;
+    top: 15px;
+
+}
+
+.card button{
+    position: relative;
+    bottom: 30px;
+    width: 150px;
+    left: 135px;
+    background-image: linear-gradient(to right,rgb(221,202,163),rgb(67,85,90));
+    color: white;
+    border: solid 1px ;
+}
