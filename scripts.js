@@ -30,6 +30,7 @@ responce.then((data)=>data.json())
     let col =  document.createElement("div");
     col.classList ="col-sm-6 col-md-4 col-lg-4 col-xl-4" ;
     col.innerHTML=`
+    <h1>Rest Counties</h1>
     <div class="card h-100 " >
     <div class="card-header ">
     <h5 class="card-title text-center ">${key.name.common}</h5>
