@@ -3,7 +3,9 @@
     margin: 0;
     box-sizing: border-box;
 }
-
+h1{
+    text-align: center;
+}
 .container{
     color: white;
     background-color: rgb(35,64,75);
