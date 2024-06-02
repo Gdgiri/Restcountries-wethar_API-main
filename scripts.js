@@ -1,115 +1,76 @@
-// ? Create Element
+function element(tag, classname, id, text) {
+  let tags = document.createElement(tag);
+  tags.classList = classname;
+  tags.id = id;
+  tags.innerHTML = text;
+  return tags;
+}
 
-    function element(tagename,claslist,idname,content){
-        
-        let ele =document.createElement(tagename);
-        // ele.className=clasname;
-        ele.classList=claslist;
-        ele.id=idname;
-        ele.innerHTML=content;
+// creating the base (container , heading , row)
 
-        return ele
-      
+let container = element("div", "container", "", "");
+let h1 = element("h1", "text-center", "title", "Countries Weather Details");
+let row = element("div", "row", "", "");
+
+//fetch part
+
+let response = fetch("https://restcountries.com/v3.1/all")
+  .then((data) => data.json())
+  .then((ele) => {
+    {
+      for (let i = 0; i < ele.length; i++) {
+        let col = document.createElement("div");
+        col.classList = "col-sm-6 col-md-4 col-lg-4 col-xl-4";
+        col.innerHTML = `
+          <div class="card h-100">
+          <div class="card-header">
+          <h5 class="card-title text-center">${ele[i].name.common}</h5>
+          </div>
+          <div class="img-box">
+          <img src="${ele[i].flags.png}" alt="flag" class="card-img-top" >
+          </div>
+          <div class="card-body">
+          <div class="card-text text-center">Region: ${ele[i].region}</div>
+          <div class="card-text text-center">Capital: ${ele[i].capital}</div>
+          <div class="card-text text-center">Country-code: ${ele[i].cca3}</div>
+          <div class="card-text text-center">Population: ${ele[i].population}</div>
+          <button class="btn btn-primary ">Click for Weather</button>
+          </div>
+          </div>
+          `;
+        row.append(col);
+      }
     }
-// ? create container 
+    //Button logic for Weather Details from Weather api
 
-let condainer = element("div","container","","");
-let head = element("h1","text-center","title","Countries Weather Details");
-let row = element("div","row","","");
+    let buttons = document.querySelectorAll("button"); //select all the buttons from the api
+    buttons.forEach((btn, index) => {
+      //btn-classname index-userdefined name
+      btn.addEventListener("click", () => {
+        //latlng splitting for weather api
 
+        let latlng = ele[index].latlng; //ele[index]=ele is a array name and index is a index value
+        let lat = latlng[0];
+        let lon = latlng[1]; // in this way we split the lat and lng
 
-//? api fetch
+        //Weather api getting and updating the lat , lon , api key to the api and append
 
-let responce = fetch("https://restcountries.com/v3.1/all")
-responce.then((data)=>data.json())
-.then((result)=>{
-    console.log(result)
+        let weatherApi = fetch(
+          `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&units=metrics&appid=5c0172544e3c22ffd6a7928d766ad4fd`
+        )
+          .then((data1) => data1.json())
+          .then((ele1) => {
+            alert(
+              `  Weather of ${ele[index].name.common} is ${Math.floor(
+                ele1.main.temp
+              )}°F`
+            );
+          });
+      });
+    });
+  })
+  .catch((error) => console.log(error));
 
- for(let key of result){
-    
-    let col =  document.createElement("div");
-    col.classList ="col-sm-6 col-md-4 col-lg-4 col-xl-4" ;
-    col.innerHTML=`
-    <div class="card h-100 " >
-    <div class="card-header ">
-    <h5 class="card-title text-center ">${key.name.common}</h5>
-    </div>
-    <div class = "img-box">
-    <img src="${key.flags.png}" alt="country-img" class="card-img-top" >
-    </div>
-     
-    <div class="card-body text-center">
-    
-    <p>Capital : ${key.capital}</p>
-  
-
-    <p>Capital : ${key.region}</p>
-  
-    
-    <p>Capital : ${key.cca3}</p>
-   
-    </div>
-    <button class="btn btn-primary "> Click for weather </button>
-    </div>
-    `
-    row.append(col)
- }
-
-// ? Button logic for appending weather detaile from weather api
-
-let buttons = document.querySelectorAll("button")
-
-buttons.forEach((btn,index)=>{
-    btn.addEventListener("click",()=>{
-        let latlng = result[index].latlng
-        // console.log(latlng)
-        let lat = latlng[0]
-        let lon = latlng[1]
-
-        // console.log(lat);
-        // console.log(lon);
-
-        // ? weather api logic
-        let wetharapi = fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=27841d2b206619c6fc9c3093a252883c`)
-        wetharapi.then((data11)=>data11.json())
-        .then((ele22)=>{
-            // alert(`weather :${ele22}`)
-            
-            // let celsiusround= Math.round(celsius)
-
-            // let Fahrenheit = celsiusround * 1.8 + 32 
-            console.log(ele22);
-            alert(`Weather of ${result[index].name.common} is : ${Math.floor(ele22.main.temp)}🌡️C`)
-        })
-    })
-})
-
-
-   
-})
-.catch((error)=>{
-     console.log(error)
-})
-
-
-// ? append part
-condainer.append(row)
-document.body.append(condainer,head)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+// appending part
+container.append(row);
+document.body.append(h1, container);

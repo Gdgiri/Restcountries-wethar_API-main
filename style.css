@@ -1,46 +1,43 @@
-*{
-    padding: 0;
-    margin: 0;
-    box-sizing: border-box;
+.container {
+  color: white;
+  background-color: rgb(35, 64, 75);
+  padding-top: 15px;
+  padding-bottom: 15px;
 }
 
-.container{
-    color: white;
-    background-color: rgb(35,64,75);
-   padding-bottom:15px ;
-   padding-top:15px ;
-    
-}
-.card{
-    border-radius: 10px !important;
-    background-image: linear-gradient(to right,rgb(221,202,163),rgb(67,85,90));
-    color: white;
-
+.card {
+  border-radius: 10px !important;
+  background-image: linear-gradient(
+    to right,
+    rgb(221, 202, 163),
+    rgb(67, 85, 84)
+  );
+  margin-bottom: 10px !important;
 }
 
-.card h5{
-    background-color: black !important;
-    color: white;
-    display: block;
-    padding: 15px;
-    width: 100%;
+.card .img-box {
+  display: flex;
+  justify-content: center;
+  height: 8em;
+  margin: 30px auto 0 auto !important;
+  object-fit: scale-down;
 }
 
-.card img{
-   
-    width: 300px;
-    position: relative;
-    left: 60px;
-    top: 15px;
-
+.img-box img {
+  border-radius: 10px !important;
+  width: 90%;
+  align-self: center;
+  height: 100%;
 }
 
-.card button{
-    position: relative;
-    bottom: 30px;
-    width: 150px;
-    left: 135px;
-    background-image: linear-gradient(to right,rgb(221,202,163),rgb(67,85,90));
-    color: white;
-    border: solid 1px ;
+.card-body {
+  padding-bottom: 50px !important;
+  display: flex;
+  flex-direction: column;
+  line-height: 40px;
+  align-items: center;
+}
+
+.col-sm-6 {
+  margin-top: 1em !important;
 }
